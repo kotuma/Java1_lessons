@@ -1,4 +1,4 @@
-package ru.geekbrains.Course1__Lesson;
+package ru.geekbrains.Course1__Lesson.Lesson1;
 
 public class Main {
 
