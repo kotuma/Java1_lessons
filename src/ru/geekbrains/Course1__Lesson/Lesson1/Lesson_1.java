@@ -1,6 +1,6 @@
-package ru.geekbrains.Course1__Lesson;
+package ru.geekbrains.Course1__Lesson.Lesson1;
 
-public class Main {
+public class Lesson_1 {
 
     public static void main(String[] args) {
         boolean bool = false;
