@@ -60,15 +60,15 @@ public class Lesson_1 {
     }
 
     private static void isLeapYearOut(int year) {
-        boolean isLeapYear = false;
-        if (year % 4 == 0) { //Каждый 4-й год является високосным
-            isLeapYear = true;
-            if (year % 100 == 0) {
-                isLeapYear = false; // кроме каждого 100-го
-                if (year % 400 == 0) isLeapYear = true; // при этом, каждый 400-й – високосный
-            }
-        }
-
+//        boolean isLeapYear = false;
+//        if (year % 4 == 0) { //Каждый 4-й год является високосным
+//            isLeapYear = true;
+//            if (year % 100 == 0) {
+//                isLeapYear = false; // кроме каждого 100-го
+//                if (year % 400 == 0) isLeapYear = true; // при этом, каждый 400-й – високосный
+//            }
+//        }
+        boolean isLeapYear = (year % 100 != 0) && (year % 4 == 0) || (year % 400 == 0);
         System.out.println("Год: " + year + " - " + (isLeapYear ? "високосный": "не високосный"));
     }
 }
