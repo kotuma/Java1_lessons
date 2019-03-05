@@ -11,6 +11,7 @@ public class Lesson_2 {
         System.out.println("Lesson2. Job 3 ");
         modifyArrayValuesLessThenSix();
         System.out.println("Lesson2. Job 4 ");
+
         System.out.println("Lesson2. Job 5 ");
         System.out.println("Lesson2. Job 6 ");
         System.out.println("Lesson2. Job 7 ");
