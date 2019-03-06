@@ -20,6 +20,13 @@ public class Lesson_2 {
         fillArrayAndGetMinMax();
 
         System.out.println("Lesson2. Job 6 ");
+        int[] arr1 = { 2, 2, 2, 1, 2, 2, 10, 1 }; // Balanced array
+        int[] arr2 = { 1, 1, 1, 2, 1 }; // Balanced array
+        int[] arr3 = { 8, 9, 4 }; // Disbalanced array
+        System.out.println(checkBalance(arr1));
+        System.out.println(checkBalance(arr2));
+        System.out.println(checkBalance(arr3));
+
         System.out.println("Lesson2. Job 7 ");
     }
     private static void fillArrayAndInvert() {
@@ -66,5 +73,9 @@ public class Lesson_2 {
             if (val > max) max = val;
         }
         System.out.println("Min/max values: " + min + " / " + max);
+    }
+
+    private static boolean checkBalance(int[] iArr) {
+        return false
     }
 }
