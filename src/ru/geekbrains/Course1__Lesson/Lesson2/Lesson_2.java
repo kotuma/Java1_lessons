@@ -17,6 +17,8 @@ public class Lesson_2 {
         fill_2D_ArrayByDiags();
 
         System.out.println("Lesson2. Job 5 ");
+        fillArrayAndGetMinMax();
+
         System.out.println("Lesson2. Job 6 ");
         System.out.println("Lesson2. Job 7 ");
     }
@@ -54,5 +56,15 @@ public class Lesson_2 {
             }
             System.out.println(Arrays.toString(arr[i]));
         }
+    }
+
+    private static void fillArrayAndGetMinMax() {
+        int[] arr = { 7, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 4 };
+        int min = arr[0]; int max = arr[0];
+        for (int val: arr) {
+            if (val < min) min = val;
+            if (val > max) max = val;
+        }
+        System.out.println("Min/max values: " + min + " / " + max);
     }
 }
