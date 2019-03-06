@@ -28,6 +28,10 @@ public class Lesson_2 {
         System.out.println("Balanced array: " + checkBalance(arr3));
 
         System.out.println("\nLesson2. Job 7 ");
+        int[] arr4 = { 1, 2, 3, 4, 5 };
+        arrayShifter(arr4, 1);
+        System.out.println("Shifted array: " + Arrays.toString(arr4));
+
     }
     private static void fillArrayAndInvert() {
         int[] iArr = { 0, 1, 0, 0, 1, 0, 1, 1 };
@@ -90,5 +94,26 @@ public class Lesson_2 {
             for (int i = bgnPos; i < arr.length; i++) res += arr[i];
         }
         return res;
+    }
+
+    private static void arrayShifter(int[] arr, int shift) {
+        boolean isPositiveDirection = (shift >= 0);
+        int count = shift;
+        if (!isPositiveDirection) count = shift * -1;
+        for (int i = 0; i < count; i++) shiftStep(arr, isPositiveDirection);
+    }
+
+    private static void shiftStep(int[] arr, boolean isPositiveDirection) {
+        int memoredVal;
+        if (isPositiveDirection) {
+            memoredVal = arr[arr.length - 1]; // Last array element
+            for (int i = arr.length - 1; i > 0; i--) arr[i] = arr[i - 1]; // Prev element
+            arr[0] = memoredVal;
+        } else  {
+            memoredVal = arr[0];  // First array element
+            for (int i = 0; i < arr.length - 1; i++) arr[i] = arr[i + 1]; // Next element
+            arr[arr.length - 1] = memoredVal;
+        }
+
     }
 }
