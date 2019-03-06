@@ -6,11 +6,15 @@ public class Lesson_2 {
     public static void main(String[] args) {
         System.out.println("Lesson2. Job 1 ");
         fillArrayAndInvert();
+
         System.out.println("Lesson2. Job 2 ");
         createArrayAndFillPlus3();
+
         System.out.println("Lesson2. Job 3 ");
         modifyArrayValuesLessThenSix();
+
         System.out.println("Lesson2. Job 4 ");
+        fill_2D_ArrayByDiags();
 
         System.out.println("Lesson2. Job 5 ");
         System.out.println("Lesson2. Job 6 ");
@@ -36,5 +40,19 @@ public class Lesson_2 {
             arr[i] = (arr[i] < 6? arr[i] * 2: arr[i]);
         }
         System.out.println(Arrays.toString(arr));
+    }
+
+    private static void fill_2D_ArrayByDiags() {
+        int[][] arr = new int[5][5];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if ( (i == j)  || (j == arr[i].length - 1 - i) ) {
+                    arr[i][j] = 1;
+                } else {
+                    arr[i][j] = 0;
+                }
+            }
+            System.out.println(Arrays.toString(arr[i]));
+        }
     }
 }
