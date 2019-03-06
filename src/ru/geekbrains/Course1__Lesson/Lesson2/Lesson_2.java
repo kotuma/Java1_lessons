@@ -7,27 +7,27 @@ public class Lesson_2 {
         System.out.println("Lesson2. Job 1 ");
         fillArrayAndInvert();
 
-        System.out.println("Lesson2. Job 2 ");
+        System.out.println("\nLesson2. Job 2 ");
         createArrayAndFillPlus3();
 
-        System.out.println("Lesson2. Job 3 ");
+        System.out.println("\nLesson2. Job 3 ");
         modifyArrayValuesLessThenSix();
 
-        System.out.println("Lesson2. Job 4 ");
+        System.out.println("\nLesson2. Job 4 ");
         fill_2D_ArrayByDiags();
 
-        System.out.println("Lesson2. Job 5 ");
+        System.out.println("\nLesson2. Job 5 ");
         fillArrayAndGetMinMax();
 
-        System.out.println("Lesson2. Job 6 ");
+        System.out.println("\nLesson2. Job 6 ");
         int[] arr1 = { 2, 2, 2, 1, 2, 2, 10, 1 }; // Balanced array
         int[] arr2 = { 1, 1, 1, 2, 1 }; // Balanced array
         int[] arr3 = { 8, 9, 4 }; // Disbalanced array
-        System.out.println(checkBalance(arr1));
-        System.out.println(checkBalance(arr2));
-        System.out.println(checkBalance(arr3));
+        System.out.println("Balanced array: " + checkBalance(arr1));
+        System.out.println("Balanced array: " + checkBalance(arr2));
+        System.out.println("Balanced array: " + checkBalance(arr3));
 
-        System.out.println("Lesson2. Job 7 ");
+        System.out.println("\nLesson2. Job 7 ");
     }
     private static void fillArrayAndInvert() {
         int[] iArr = { 0, 1, 0, 0, 1, 0, 1, 1 };
@@ -55,11 +55,7 @@ public class Lesson_2 {
         int[][] arr = new int[5][5];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                if ( (i == j)  || (j == arr[i].length - 1 - i) ) {
-                    arr[i][j] = 1;
-                } else {
-                    arr[i][j] = 0;
-                }
+                if ( (i == j)  || (j == arr[i].length - 1 - i) ) arr[i][j] = 1;
             }
             System.out.println(Arrays.toString(arr[i]));
         }
@@ -76,6 +72,23 @@ public class Lesson_2 {
     }
 
     private static boolean checkBalance(int[] iArr) {
-        return false
+        boolean res = false;
+        int leftSum = 0;
+        for (int i = 0; i < iArr.length; i++) {
+            leftSum += iArr[i];
+            if (leftSum == getRightSum(iArr, i + 1)) {
+                res = true;
+                break;
+            }
+        }
+        return res;
+    }
+
+    private static int getRightSum(int[] arr, int bgnPos) {
+        int res = 0;
+        if ((bgnPos >= 0) && (bgnPos < arr.length)) {
+            for (int i = bgnPos; i < arr.length; i++) res += arr[i];
+        }
+        return res;
     }
 }
