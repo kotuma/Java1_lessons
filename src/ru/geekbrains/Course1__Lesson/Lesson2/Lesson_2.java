@@ -107,13 +107,12 @@ public class Lesson_2 {
         int memoredVal;
         if (isPositiveDirection) {
             memoredVal = arr[arr.length - 1]; // Last array element
-            for (int i = arr.length - 1; i > 0; i--) arr[i] = arr[i - 1]; // Prev element
+            for (int i = arr.length - 1; i > 0; i--) arr[i] = arr[i - 1]; // Set prev element
             arr[0] = memoredVal;
         } else  {
-            memoredVal = arr[0];  // First array element
-            for (int i = 0; i < arr.length - 1; i++) arr[i] = arr[i + 1]; // Next element
+            memoredVal = arr[0]; // First array element
+            for (int i = 0; i < arr.length - 1; i++) arr[i] = arr[i + 1]; // Set next element
             arr[arr.length - 1] = memoredVal;
         }
-
     }
 }
