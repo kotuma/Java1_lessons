@@ -20,9 +20,10 @@ public class Lesson_2 {
         fillArrayAndGetMinMax();
 
         System.out.println("\nLesson2. Job 6 ");
-        int[] arr1 = { 2, 2, 2, 1, 2, 2, 10, 1 }; // Balanced array
+        int[] arr1 = { 3, -1, -2 };
+        //int[] arr1 = { 2, 2, 2, 1, 2, 2, 10, 1 }; // Balanced array
         int[] arr2 = { 1, 1, 1, 2, 1 }; // Balanced array
-        int[] arr3 = { 8, 9, 4 }; // Disbalanced array
+        int[] arr3 = { 3, -1, -2 }; // Disbalanced array
         System.out.println("Balanced array: " + checkBalance(arr1));
         System.out.println("Balanced array: " + checkBalance(arr2));
         System.out.println("Balanced array: " + checkBalance(arr3));
@@ -78,7 +79,8 @@ public class Lesson_2 {
     private static boolean checkBalance(int[] iArr) {
         boolean res = false;
         int leftSum = 0;
-        for (int i = 0; i < iArr.length; i++) {
+        if ( iArr.length < 2 ) return res;
+        for (int i = 0; i < iArr.length - 1; i++) { // исправлено
             leftSum += iArr[i];
             if (leftSum == getRightSum(iArr, i + 1)) {
                 res = true;

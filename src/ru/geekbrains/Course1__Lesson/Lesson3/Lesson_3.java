@@ -36,6 +36,7 @@ public class Lesson_3 {
                 if (n < value) {
                     System.out.println("   - Загаданное число больше");
                 } else System.out.println("   - Загаданное число меньше");
+
             }
 
         }
