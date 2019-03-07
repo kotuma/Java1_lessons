@@ -28,7 +28,16 @@ public class Lesson_3 {
         System.out.println("\nУгадайте число в диапазоне от 0 до 9. У Вас три попытки.");
         System.out.println("   - Введите число");
         for (int i = 0; i < 3; i++) {
-            int sc.nextInt()
+            int n = sc.nextInt();
+            if (n == value) {
+                System.out.println("   - Ура! Вы угадали!");
+                return;
+            } else {
+                if (n < value) {
+                    System.out.println("   - Загаданное число больше");
+                } else System.out.println("   - Загаданное число меньше");
+            }
+
         }
     }
 }
