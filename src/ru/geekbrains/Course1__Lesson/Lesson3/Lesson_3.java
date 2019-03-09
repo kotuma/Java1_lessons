@@ -40,5 +40,6 @@ public class Lesson_3 {
             }
 
         }
+        sc.close();
     }
 }
