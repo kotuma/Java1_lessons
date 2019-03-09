@@ -23,7 +23,7 @@ public class GuessingWord{
                 "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
         Random random = new Random();
         Integer selectedIndex = random.nextInt(words.length);
-        System.out.println("Загадано слово: " + words[selectedIndex]);
+        //System.out.println("Загадано слово: " + words[selectedIndex]);
         System.out.println("Введите свой ответ:");
         String answer;
         boolean equal;
