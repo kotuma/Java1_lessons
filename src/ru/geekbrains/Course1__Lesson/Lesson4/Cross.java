@@ -6,7 +6,10 @@ import java.util.Scanner;
 public class Cross {
     private static int SIZE_X = 5;
     private static int SIZE_Y = SIZE_X;
-    private static char[][] field = new char[SIZE_Y][SIZE_X];
+    private static char [][] field = new char[SIZE_Y][SIZE_X];
+    private static int [] stateMap = new int[SIZE_Y + SIZE_X + 2];
+    private static int [] stateIDs = new int[SIZE_Y + SIZE_X + 2];
+    private static int WIN_COUNT = 4;
     private static char PLAYER_DOT = 'X';
     private static char AI_DOT = 'O';
     private static char EMPTY_DOT = '.';
@@ -38,7 +41,7 @@ public class Cross {
             return true;
         }
 
-        if (isWin()) { // Проверка на выигрыш
+        if (isWin(dot)) { // Проверка на выигрыш
             if (dot == AI_DOT) {
                 System.out.println("- Победил компьютер !");
             } else {
@@ -101,7 +104,7 @@ public class Cross {
         if (x < 0 || y < 0 || x > SIZE_X - 1 || y > SIZE_Y - 1) {
             return false;
         }
-        return field[y][x] == EMPTY_DOT;
+        return (field[y][x] == EMPTY_DOT);
     }
 
     // Ход игрока
@@ -142,7 +145,68 @@ public class Cross {
     }
 
     // Проверка на выигрыш
-    private static boolean isWin() {
+    private static boolean isWin(char dot) {
+        fillStateMapFor(dot);
+        for (int i = 0; i < stateMap.length; i++) {
+            if (stateMap[i] >= WIN_COUNT) {
+               return true;
+            }
+        }
         return false;
     }
+
+    // Заполнение карты-статуса
+    private static void fillStateMapFor(char dot) {
+        int id = -1;
+        int cnt = 0;
+        // Расчет массива значений для строк
+        for (int i = 0; i < SIZE_Y; i++) {
+            id++;
+            cnt = 0;
+            for (int j = 0; j <SIZE_X; j++) {
+                if (field[i][j] == dot) {
+                    cnt++;
+                } else if (field[i][j] != EMPTY_DOT) {
+                    cnt = 0; // показатель для данной линии аннулируется при наличии вражеского dot
+                    break;
+                }
+
+            }
+            stateMap[id] = cnt;
+            stateIDs[id] = id;
+        }
+
+        // Расчет массива значений для колонок
+        for (int j = 0; j <SIZE_X; j++) {
+            id++;
+            cnt = 0;
+            for (int i = 0; i < SIZE_Y; i++) {
+                if (field[i][j] == dot) {
+                    cnt++;
+                } else if (field[i][j] != EMPTY_DOT) {
+                cnt = 0; // показатель для данной линии аннулируется при наличии вражеского dot
+                break;
+            }
+            }
+            stateMap[id] = cnt;
+            stateIDs[id] = id;
+        }
+
+        // Расчет массива значений для левой диагонали
+        id++;
+        cnt = 0;
+        stateMap[id] = cnt;
+        stateIDs[id] = id;
+        // ToDo - сделать подсчет
+
+        // Расчет массива значений для правой диагонали
+        id++;
+        cnt = 0;
+        stateMap[id] = cnt;
+        stateIDs[id] = id;
+        // ToDo - сделать подсчет
+    }
+
+
+
 }
