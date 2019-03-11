@@ -205,6 +205,7 @@ public class Cross {
         stateMap[id] = cnt;
         stateIDs[id] = id;
         // ToDo - сделать подсчет
+
     }
 
 
