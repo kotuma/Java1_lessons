@@ -7,9 +7,8 @@ public class Forest {
     private static final int MAX_VALUE = 20;
     private int[] iForest;
 
-
     public Forest() {
-        iForest = new int[20];
+        iForest = new int[MAX_VALUE];
     }
 
     private void clearState() {
