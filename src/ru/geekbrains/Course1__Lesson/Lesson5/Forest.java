@@ -32,6 +32,6 @@ public class Forest {
 
     @Override
     public String toString() {
-        return "Результат подсчета деревьев в лесу: " + Arrays.toString(iForest);
+        return "Результат подсчета деревьев в лесу:  " + Arrays.toString(iForest);
     }
 }
