@@ -23,6 +23,7 @@ public class Lesson_2 {
         int[] arr1 = { 3, -1, -2 };
         //int[] arr1 = { 2, 2, 2, 1, 2, 2, 10, 1 }; // Balanced array
         int[] arr2 = { 1, 1, 1, 2, 1 }; // Balanced array
+
         int[] arr3 = { 3, -1, -2 }; // Disbalanced array
         System.out.println("Balanced array: " + checkBalance(arr1));
         System.out.println("Balanced array: " + checkBalance(arr2));
