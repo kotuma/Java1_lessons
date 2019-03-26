@@ -10,14 +10,17 @@ public class MobaFrame extends JFrame {
     private static final int WND_WITH = 800;
     private static final int INDIENT = 2;
     private static final int DEFAULT_HEROES_COUNT = 5;
-
+    private static final int TOP_PANEL_HEIGHT = 30;
+    private static final int BOTTOM_PANEL_HEIGHT = 200;
     JTextArea jTextMaxPlayerUnits;
+    JButton btnStartGame;
 
     public MobaFrame(){
         setTitle("BattleGame (Moba)");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         wndToSrceenCenter();
-        outSettingsInterface( INDIENT, INDIENT, WND_WITH, 30);
+        outSettingsInterface( INDIENT, 0, WND_WITH - INDIENT, TOP_PANEL_HEIGHT);
+        outBottomInterface();
         setVisible(true);
     }
 
@@ -37,7 +40,7 @@ public class MobaFrame extends JFrame {
 
     private void outBottomInterface(int x, int y, int width, int height){
         JPanel jPanel = new JPanel();
-
+        btnStartGame = new JButton("Старт");
         jPanel.add(this.jTextMaxPlayerUnits = new JTextArea(Integer.toString(DEFAULT_HEROES_COUNT)));
         this.add(jPanel, BorderLayout.SOUTH);
     }
