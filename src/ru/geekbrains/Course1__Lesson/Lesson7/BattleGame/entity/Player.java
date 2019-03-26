@@ -1,8 +1,6 @@
-package ru.geekbrains.Course1__Lesson.Lesson7.entity;
+package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity;
 
-import ru.geekbrains.Course1__Lesson.Lesson7.entity.units.*;
-
-import java.util.Arrays;
+import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.*;
 
 public class Player {
     public static final int DEFAULT_HEROES_COUNT = 4;

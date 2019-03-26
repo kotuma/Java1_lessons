@@ -1,7 +1,7 @@
-package ru.geekbrains.Course1__Lesson.Lesson7;
+package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame;
 
-import ru.geekbrains.Course1__Lesson.Lesson7.entity.Player;
-import ru.geekbrains.Course1__Lesson.Lesson7.entity.units.HeroesGenerator;
+import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.Player;
+import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.HeroesGenerator;
 
 import java.util.Arrays;
 import java.util.Scanner;

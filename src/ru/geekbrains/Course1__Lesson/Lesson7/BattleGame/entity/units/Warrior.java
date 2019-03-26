@@ -1,4 +1,4 @@
-package ru.geekbrains.Course1__Lesson.Lesson7.entity.units;
+package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units;
 
 public class Warrior extends Hero{
     public Warrior() {
