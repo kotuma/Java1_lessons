@@ -44,22 +44,31 @@ public class MobaFrame extends JFrame {
     }
 
     private void outBottomInterface(int x, int y, int width, int height){
+        final int BUTTON_WIDTH = 100;
+
+        btnStartGame = new JButton("Старт");
+        //btnStartGame.setBorder(new EmptyBorder(0, 0, 0, 0));
+        btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT - 7));
+
+        JPanel jPanelForButton = new JPanel();
+        //jPanelForButton.setBorder(new EmptyBorder(0, 0, 0, 0));
+        jPanelForButton.setLayout(new FlowLayout());
+        jPanelForButton.setBackground(Color.red);
+        jPanelForButton.setPreferredSize(new Dimension(width, BUTTON_HEIGHT));
+
+        jPanelForButton.add(btnStartGame);
+
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
         jPanel.setBackground(Color.green);
         jPanel.setPreferredSize(new Dimension(width, height));
-        final int BUTTON_WIDTH = 100;
-        btnStartGame = new JButton("Старт");
-        btnStartGame.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
-        btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-
-        jPanel.add(btnStartGame);
 
         jTextGameLog = new JTextArea("Протокол игры:", 10, 1);
         JScrollPane jScroll = new JScrollPane(jTextGameLog);
         jScroll.setPreferredSize(new Dimension(WND_WIDTH, BOTTOM_PANEL_HEIGHT - BUTTON_HEIGHT - 2 * INDIENT));
         jScroll.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
-        jPanel.add(jScroll, BorderLayout.SOUTH);
+        jPanel.add(jPanelForButton, BorderLayout.NORTH);
+        jPanel.add(jScroll, BorderLayout.CENTER);
         add(jPanel, BorderLayout.SOUTH);
     }
 
