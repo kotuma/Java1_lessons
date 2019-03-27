@@ -48,7 +48,7 @@ public class MobaFrame extends JFrame {
 
         btnStartGame = new JButton("Старт");
         //btnStartGame.setBorder(new EmptyBorder(0, 0, 0, 0));
-        btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT - 7));
+        btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
         JPanel jPanelForButton = new JPanel();
         //jPanelForButton.setBorder(new EmptyBorder(0, 0, 0, 0));
