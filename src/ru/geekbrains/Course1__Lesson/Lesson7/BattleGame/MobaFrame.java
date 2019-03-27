@@ -52,7 +52,7 @@ public class MobaFrame extends JFrame {
 
         JPanel jPanelForButton = new JPanel();
         //jPanelForButton.setBorder(new EmptyBorder(0, 0, 0, 0));
-        jPanelForButton.setLayout(new FlowLayout());
+        jPanelForButton.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         jPanelForButton.setBackground(Color.red);
         jPanelForButton.setPreferredSize(new Dimension(width, BUTTON_HEIGHT));
 
