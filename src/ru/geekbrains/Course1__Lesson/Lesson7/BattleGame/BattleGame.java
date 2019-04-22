@@ -52,6 +52,6 @@ public class BattleGame {
             }
 
         }
-        return BattleGame .activePlayerID;
+        return BattleGame.activePlayerID;
     }
 }

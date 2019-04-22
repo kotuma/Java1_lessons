@@ -37,14 +37,14 @@ public class Player {
         this.heroes = heroesArray;
     }
 
-    public boolean isWinAfterAttack(Player enemyPlayer){
+    public boolean isWinAfterAttack(Player enemyPlayer) {
         Hero ourHero = this.getHero();
         Hero enemyHero = enemyPlayer.getHero();
 
         ourHero.setDamage(enemyHero);
 
         String stat =
-                this.getName() + " "+
+                this.getName() + " " +
                         ourHero.getClass().getSimpleName() + " -> " +
                         enemyHero.getClass().getSimpleName();
         if (enemyHero.isAlive()) {
@@ -75,8 +75,12 @@ public class Player {
 
     public boolean isDamaged() {
         for (Hero h: heroes) {
-            if (h.isAlive()) {
-                return false;
+            if(h == null) {
+                break;
+            } else {
+                if (h.isAlive()) {
+                    return false;
+                }
             }
         }
         return true;

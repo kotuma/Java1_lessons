@@ -1,5 +1,6 @@
 package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity;
 
+import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.Healer;
 import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.Hero;
 import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.HeroesHelper;
 
@@ -13,6 +14,12 @@ public class PlayerCommandInterface extends Player {
     private JButton jButtonAddHero;
     private JTextArea jTextArea;
     private JTextArea jTextMaxPlayerUnits;
+
+    public void setjTextGameLog(JTextArea jTextGameLog) {
+        this.jTextGameLog = jTextGameLog;
+    }
+
+    private JTextArea jTextGameLog;
 
 
     public void setjTextMaxPlayerUnits(JTextArea jTextMaxPlayerUnits) {
@@ -56,16 +63,45 @@ public class PlayerCommandInterface extends Player {
         }
     }
 
-    public class ButtonAddHeroListener implements ActionListener {
+    public boolean isWinAfterAttack(Player enemyPlayer) {
+        Hero ourHero = this.getHero();
+        Hero enemyHero = enemyPlayer.getHero();
+        if(enemyHero == null) {
+            return true;
+        }
+
+        ourHero.setDamage(enemyHero);
+
+        jTextGameLog.append("\n" + "     Детали атаки:");
+        String stat =
+                "      - " + this.getName() + " " +
+                        ourHero.getClass().getSimpleName() + " атаковал " +
+                        enemyHero.getClass().getSimpleName();
+        if (enemyHero.isAlive()) {
+            jTextGameLog.append("\n" + stat + " (его здоровье после атаки: " + enemyHero.getHealth() + ")");
+        } else {
+            jTextGameLog.append("\n" + stat + " (убит)");
+        }
+
+        if (enemyHero.isAlive()) {
+            Healer enemyHealer = enemyPlayer.getHealer();
+            if (enemyHealer != null) {
+                enemyHealer.healingHero(enemyPlayer.getHero());
+                jTextGameLog.append("\n" + "      - Доктор вылечил " + enemyHero.getClass().getSimpleName() + " до " + enemyHero.getHealth());
+            }
+        }
+
+        return enemyPlayer.isDamaged();
+    }
+
+    private class ButtonAddHeroListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //jTextArea.append("\n" + HeroesHelper.getHeroTypeByID(jComboBoxHeroSelector.getSelectedIndex()));
-            //Добавлять unit в реальный список юнитов и проверять на мах кол-во
             maxUnitsCount = Integer.parseInt(jTextMaxPlayerUnits.getText().toString());
 
             Hero[] heroes = getHeroes();
 
             if(heroes == null || getHeroes().length != maxUnitsCount) {
-                jTextArea.setText("Состав команды: ---- ");
+                jTextArea.setText("Состав команды:");
                 heroes = new Hero[maxUnitsCount];
                 for (int i = 0; i < heroes.length; i++) {
                     heroes[i] = null;
@@ -80,7 +116,6 @@ public class PlayerCommandInterface extends Player {
                 } else {
                     i++;
                 }
-
             }
 
             if (heroes != null && i < maxUnitsCount && heroes[i] == null) {

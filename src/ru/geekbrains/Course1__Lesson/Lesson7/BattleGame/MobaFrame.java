@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MobaFrame extends JFrame {
@@ -18,6 +19,7 @@ public class MobaFrame extends JFrame {
     private static final int TOP_PANEL_HEIGHT = 30;
     private static final int BOTTOM_PANEL_HEIGHT = 300;
     private static final int BUTTON_HEIGHT = 25;
+    private static int activePlayerID = 0;
     JTextArea jTextMaxPlayerUnits;
     JTextArea jTextGameLog;
     JButton btnStartGame;
@@ -75,6 +77,8 @@ public class MobaFrame extends JFrame {
         jPanelForButton.setPreferredSize(new Dimension(width, BUTTON_HEIGHT));
 
         jPanelForButton.add(btnStartGame);
+        StartBtnListener startBtnListener = new StartBtnListener();
+        btnStartGame.addActionListener(startBtnListener);
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
@@ -156,7 +160,6 @@ public class MobaFrame extends JFrame {
         JTextArea jPlayerUnitsTextArea = new JTextArea("Состав команды игрока:", 5, 1);
 
         JScrollPane jScroll = new JScrollPane(jPlayerUnitsTextArea);
-        //jScroll.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
         jMainPanel.add(jScroll, BorderLayout.CENTER);
 
         // Элементы интерфейса игрока
@@ -164,6 +167,55 @@ public class MobaFrame extends JFrame {
         player.setjTextArea(jPlayerUnitsTextArea);
         player.setjButtonAddHero(btnAddPerson);
         player.setjTextMaxPlayerUnits(jTextMaxPlayerUnits);
+        player.setjTextGameLog(jTextGameLog);
     }
+
+    public int getActivePlayerID() {
+        return activePlayerID;
+    }
+
+    private int ChangeActivePlayerID(int activePlayerID) {
+        switch (activePlayerID) {
+            case 0: {
+                this.activePlayerID = 1;
+                break;
+            }
+            case 1: {
+                this.activePlayerID = 0;
+                break;
+            }
+        }
+        return this.activePlayerID;
+    }
+
+    private class StartBtnListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            boolean finishGame = false;
+            int idActive = 0;
+            int idPassive = 1;
+
+            if(players[idActive].getHeroes() == null || players[idPassive].getHeroes() == null) {
+                jTextGameLog.append("\n" + "\n" + "Сначала соберите команды для игроков ..." + "\n");
+                return;
+            }
+            jTextGameLog.append("\n" + "\n" + "Начало игры" + "\n");
+
+            while (!finishGame) {
+                idActive = MobaFrame.activePlayerID;
+                idPassive  = ChangeActivePlayerID(idActive);
+                jTextGameLog.append("\n" + "Атаковал игрок: " + players[idActive].getName() + ": " + Arrays.toString(players[idActive].getHeroes()));
+                jTextGameLog.append("\n" + "Игрок " + players[idPassive].getName() + ": " + Arrays.toString(players[idPassive].getHeroes()));
+
+                if (players[idActive].isWinAfterAttack(players[idPassive])) {
+                    jTextGameLog.append("\n" + "\n" + "Победил игрок: " + players[idActive].getName() + " !!!");
+                    finishGame = true;
+                    break;
+                }
+            }
+        }
+    }
+
+
+
 
 }
