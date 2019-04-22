@@ -1,12 +1,13 @@
 package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame;
 
 import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.Player;
+import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.PlayerCommandInterface;
 import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.HeroesGenerator;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.Scanner;
 
 public class MobaFrame extends JFrame {
@@ -20,19 +21,28 @@ public class MobaFrame extends JFrame {
     JTextArea jTextMaxPlayerUnits;
     JTextArea jTextGameLog;
     JButton btnStartGame;
+//    private Player[] players = {
+//            new Player("Green", true, HeroesGenerator.generateRandomHeroes(Player.DEFAULT_HEROES_COUNT)),
+//            new Player("Red", false, HeroesGenerator.generateRandomHeroes(Player.DEFAULT_HEROES_COUNT))
+//    };
+    private PlayerCommandInterface[] players = {
+        new PlayerCommandInterface("Green", true),
+        new PlayerCommandInterface("Red", false)
+        // new PlayerCommandInterface("Red", false, HeroesGenerator.generateRandomHeroes(Player.DEFAULT_HEROES_COUNT))
+    };
+
+
 
     public MobaFrame(){
         setTitle("BattleGame (Moba)");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         wndToSrceenCenter();
+
         outSettingsInterface( INDIENT, 0, WND_WIDTH - INDIENT, TOP_PANEL_HEIGHT);
         outBottomInterface(0, WND_HEIGHT - BOTTOM_PANEL_HEIGHT, WND_WIDTH, BOTTOM_PANEL_HEIGHT - INDIENT);
         Scanner in = new Scanner(System.in);
 
-        Player[] players = {
-                new Player("Green", true, HeroesGenerator.generateRandomHeroes(Player.DEFAULT_HEROES_COUNT)),
-                new Player("Red", false, HeroesGenerator.generateRandomHeroes(Player.DEFAULT_HEROES_COUNT))
-        };
+
         outCenterInterface();
         //outPlayerInterface(INDIENT, TOP_PANEL_HEIGHT, );
         setVisible(true);
@@ -49,19 +59,19 @@ public class MobaFrame extends JFrame {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("Максимальное количество персонажей:"));
         jPanel.add(jTextMaxPlayerUnits = new JTextArea(Integer.toString(DEFAULT_HEROES_COUNT)));
-        jPanel.setBackground(Color.yellow);
+        //jPanel.setBackground(Color.yellow);
         add(jPanel, BorderLayout.NORTH);
     }
 
     private void outBottomInterface(int x, int y, int width, int height){
-        final int BUTTON_WIDTH = 100;
+        final int BUTTON_WIDTH = 200;
 
         btnStartGame = new JButton("Старт");
         btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 
         JPanel jPanelForButton = new JPanel();
         jPanelForButton.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        jPanelForButton.setBackground(Color.red);
+        //jPanelForButton.setBackground(Color.red);
         jPanelForButton.setPreferredSize(new Dimension(width, BUTTON_HEIGHT));
 
         jPanelForButton.add(btnStartGame);
@@ -73,7 +83,6 @@ public class MobaFrame extends JFrame {
 
         jTextGameLog = new JTextArea("Протокол игры:", 10, 1);
         JScrollPane jScroll = new JScrollPane(jTextGameLog);
-        jScroll.setPreferredSize(new Dimension(WND_WIDTH, BOTTOM_PANEL_HEIGHT - BUTTON_HEIGHT - 2 * INDIENT));
         jScroll.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
         jPanel.add(jPanelForButton, BorderLayout.NORTH);
         jPanel.add(jScroll, BorderLayout.CENTER);
@@ -81,46 +90,79 @@ public class MobaFrame extends JFrame {
     }
 
     private void outCenterInterface(){
-//        final int BUTTON_WIDTH = 100;
-//
-        JButton btnAddPerson = new JButton("Добавить");
-//        btnStartGame.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-//
-//        JPanel jPanelForButton = new JPanel();
-//        jPanelForButton.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-//        jPanelForButton.setBackground(Color.red);
-//        jPanelForButton.setPreferredSize(new Dimension(width, BUTTON_HEIGHT));
-//
-//        jPanelForButton.add(btnStartGame);
+        JPanel jCentralPanel = new JPanel();
+        jCentralPanel.setLayout(new GridLayout(1, 2));
 
-        JPanel jPanel = new JPanel();
-        JPanel jPanelLeft = new JPanel();
-        jPanelLeft.setLayout(new BorderLayout());
-        JPanel jPanelRight = new JPanel();
-        jPanel.setLayout(new GridLayout(1, 2));
-        jPanelRight.setBackground(Color.BLUE);
+        JPanel jLeftPanel = new JPanel();
+        jLeftPanel.setLayout(new BorderLayout());
+        //jLeftPanel.setBackground(Color.CYAN);
 
-        JPanel jPanelPlayer1 = new JPanel();
-        jPanelPlayer1.setLayout(new BorderLayout());
-        jPanelPlayer1.setBackground(Color.green);
-        jPanelPlayer1.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
-        jPanelLeft.add(jPanelPlayer1);
+        JPanel jRightPanel = new JPanel();
+        jRightPanel.setLayout(new BorderLayout());
+        //jRightPanel.setBackground(Color.BLUE);
 
-        //jPanelLeft.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
-        //jPanel.setPreferredSize(new Dimension(width, height));
+        jLeftPanel.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
+        jRightPanel.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
 
-        jTextGameLog = new JTextArea("Состав игроков:", 10, 1);
-        JScrollPane jScroll = new JScrollPane(jTextGameLog);
-        //jScroll.setPreferredSize(new Dimension(WND_WIDTH, BOTTOM_PANEL_HEIGHT - BUTTON_HEIGHT - 2 * INDIENT));
-        jScroll.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
-        //jPanel.add(jPanelForButton, BorderLayout.NORTH);
-        jPanel.add(jPanelLeft);
-        jPanel.add(jPanelRight);
-        add(jPanel, BorderLayout.CENTER);
+        jCentralPanel.add(jLeftPanel);
+        jCentralPanel.add(jRightPanel);
+        add(jCentralPanel, BorderLayout.CENTER);
+
+        outPlayerInterface(jLeftPanel, players[0]);
+        outPlayerInterface(jRightPanel, players[1]);
     }
 
-    private void outPlayerInterface(int x, int y, int width, int height, Player player){
+    private void outPlayerInterface(JPanel jParentPanel, PlayerCommandInterface player){
+        final int BUTTON_WIDTH = 170;
+        final int LOCAL_GUP = 2;
 
+        JPanel jMainPanel = new JPanel();
+        jMainPanel.setLayout(new BorderLayout());
+        jParentPanel.add(jMainPanel, BorderLayout.CENTER);
+
+        JPanel jTopPanel = new JPanel();
+        jTopPanel.setLayout(new GridLayout(3, 1));
+        JComboBox jUnitsBox = new JComboBox();
+        //jTopPanel.add(new JLabel("Игрок: " + player.getName()));
+
+        JButton btnAddPerson = new JButton("Добавить");
+        JPanel jPlayerNamePanel = new JPanel();
+        jPlayerNamePanel.setLayout(new BorderLayout());
+        jPlayerNamePanel.add(new JLabel("Игрок: " + player.getName()), BorderLayout.CENTER);
+
+        JPanel jPanelForPlayerName = new JPanel();
+        jPanelForPlayerName.setLayout(new FlowLayout(FlowLayout.CENTER, LOCAL_GUP, LOCAL_GUP));
+        jPanelForPlayerName.add(jPlayerNamePanel);
+
+        JPanel jPanelForUnitsBox = new JPanel();
+        jPanelForUnitsBox.setLayout(new BorderLayout());
+        jPanelForUnitsBox.setBorder(new EmptyBorder( LOCAL_GUP, 0, LOCAL_GUP, 1));
+        jPanelForUnitsBox.add(jUnitsBox);
+
+        JPanel jPanelForBtnAddPerson = new JPanel();
+        jPanelForBtnAddPerson.setLayout(new BorderLayout());
+        jPanelForBtnAddPerson.setBorder(new EmptyBorder( LOCAL_GUP, 0, LOCAL_GUP * 2, 1));
+        jPanelForBtnAddPerson.add(btnAddPerson);
+
+
+        jTopPanel.add(jPanelForPlayerName);
+        jTopPanel.add(jPanelForUnitsBox);
+        jTopPanel.add(jPanelForBtnAddPerson);
+
+        btnAddPerson.setPreferredSize(new Dimension(jPanelForBtnAddPerson.getWidth(), BUTTON_HEIGHT));
+
+        jMainPanel.add(jTopPanel, BorderLayout.NORTH);
+
+        JTextArea jPlayerUnitsTextArea = new JTextArea("Состав команды игрока:", 5, 1);
+
+        JScrollPane jScroll = new JScrollPane(jPlayerUnitsTextArea);
+        //jScroll.setBorder(new EmptyBorder(INDIENT, INDIENT, INDIENT, INDIENT));
+        jMainPanel.add(jScroll, BorderLayout.CENTER);
+
+        // Элементы интерфейса игрока
+        player.setComboBoxHeroItems(jUnitsBox);
+        player.setjTextArea(jPlayerUnitsTextArea);
+        player.setjButtonAddHero(btnAddPerson);
     }
 
 }

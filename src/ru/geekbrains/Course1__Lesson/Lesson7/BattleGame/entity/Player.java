@@ -25,6 +25,12 @@ public class Player {
         this.heroes = heroes;
     }
 
+    public Player(String name, boolean active) {
+        this.name = name;
+        this.active = active;
+        this.heroes = null;
+    }
+
     public Hero[] getHeroes() {
         return heroes;
     }

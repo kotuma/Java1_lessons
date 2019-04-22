@@ -5,6 +5,10 @@ public class Healer extends Hero {
     private static final int DELTA_HEALING = 5;
     private static final int MAX_HEALING = 130;
 
+    public static String GetHeroName(){
+        return "Healer";
+    }
+
     public Healer() {
         super.Hero(20, 90, 20);
     }
