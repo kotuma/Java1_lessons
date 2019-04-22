@@ -4,18 +4,16 @@ import ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.*;
 
 public class Player {
     public static final int DEFAULT_HEROES_COUNT = 4;
+    private boolean active;
+    private String name;
 
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    private boolean active;
-
     public String getName() {
         return name;
     }
-
-    private String name;
     private Hero[] heroes = new Hero[DEFAULT_HEROES_COUNT];
 
 
@@ -33,6 +31,10 @@ public class Player {
 
     public Hero[] getHeroes() {
         return heroes;
+    }
+
+    public void setHeroes(Hero[] heroesArray) {
+        this.heroes = heroesArray;
     }
 
     public boolean isWinAfterAttack(Player enemyPlayer){

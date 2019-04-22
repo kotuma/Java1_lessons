@@ -8,9 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayerCommandInterface extends Player {
+    private int maxUnitsCount;
     private JComboBox jComboBoxHeroSelector;
     private JButton jButtonAddHero;
     private JTextArea jTextArea;
+    private JTextArea jTextMaxPlayerUnits;
+
+
+    public void setjTextMaxPlayerUnits(JTextArea jTextMaxPlayerUnits) {
+        this.jTextMaxPlayerUnits = jTextMaxPlayerUnits;
+    }
 
     public void setjComboBoxHeroSelector(JComboBox jComboBoxHeroSelector) {
         this.jComboBoxHeroSelector = jComboBoxHeroSelector;
@@ -51,8 +58,37 @@ public class PlayerCommandInterface extends Player {
 
     public class ButtonAddHeroListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            jTextArea.append("\n" + HeroesHelper.getHeroTypeByID(jComboBoxHeroSelector.getSelectedIndex()));
+            //jTextArea.append("\n" + HeroesHelper.getHeroTypeByID(jComboBoxHeroSelector.getSelectedIndex()));
             //Добавлять unit в реальный список юнитов и проверять на мах кол-во
+            maxUnitsCount = Integer.parseInt(jTextMaxPlayerUnits.getText().toString());
+
+            Hero[] heroes = getHeroes();
+
+            if(heroes == null || getHeroes().length != maxUnitsCount) {
+                jTextArea.setText("Состав команды: ---- ");
+                heroes = new Hero[maxUnitsCount];
+                for (int i = 0; i < heroes.length; i++) {
+                    heroes[i] = null;
+                }
+                setHeroes(heroes);
+            }
+
+            int i = 0;
+            while (i <= maxUnitsCount - 1) {
+                if (heroes[i] == null){
+                    break;
+                } else {
+                    i++;
+                }
+
+            }
+
+            if (heroes != null && i < maxUnitsCount && heroes[i] == null) {
+                jTextArea.append("\n" + (i+1) + ". " + HeroesHelper.getHeroTypeByID(jComboBoxHeroSelector.getSelectedIndex()));
+                heroes[i] = HeroesHelper.generateHeroByID(jComboBoxHeroSelector.getSelectedIndex());
+                setHeroes(heroes);
+            }
+
         }
     }
 

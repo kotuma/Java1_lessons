@@ -163,6 +163,7 @@ public class MobaFrame extends JFrame {
         player.setComboBoxHeroItems(jUnitsBox);
         player.setjTextArea(jPlayerUnitsTextArea);
         player.setjButtonAddHero(btnAddPerson);
+        player.setjTextMaxPlayerUnits(jTextMaxPlayerUnits);
     }
 
 }

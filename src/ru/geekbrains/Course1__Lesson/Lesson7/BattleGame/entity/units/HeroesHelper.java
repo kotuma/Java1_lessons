@@ -1,5 +1,7 @@
 package ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units;
 
+import static ru.geekbrains.Course1__Lesson.Lesson7.BattleGame.entity.units.HeroesGenerator.UNITS_CLASSES_COUNT;
+
 public class HeroesHelper {
     private static int [] heroesTypes = {0, 1, 2};
 
@@ -30,5 +32,24 @@ public class HeroesHelper {
             }
         }
         return res;
+    }
+
+    public static Hero generateHeroByID(int heroID) {
+        Hero unit = null;
+        switch (heroID) {
+            case 0: {
+                unit = new Warrior();
+                break;
+            }
+            case 1: {
+                unit = new Assassin();
+                break;
+            }
+            case 2: {
+                unit = new Healer();
+                break;
+            }
+        }
+        return unit;
     }
 }
