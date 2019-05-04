@@ -65,6 +65,8 @@ public class StartNewGameWindow extends JFrame {
 
         gameWindow.startNewGame(gameMode, fieldSize, fieldSize, winLen);
         setVisible(false);
+
+
     }
 
     private void addGameControlsModeM() {

@@ -30,8 +30,6 @@ public class GameWindow extends JFrame {
         bottomPanel.add(btnStartGame);
         bottomPanel.add(btnExit);
 
-
-
         this.add(bottomPanel, BorderLayout.SOUTH);
 
 
